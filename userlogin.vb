@@ -1,15 +1,22 @@
-﻿Public Class userlogin
-    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Dim username = txtUsername.Text
-        Dim password = txtPassword.Text
+Public Class userLogin
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles BtnLogin.Click
+        Dim username As String = TxtUserName.Text ' Textbox for username
+        Dim password As String = TxtPassword.Text ' Textbox for password
 
-        If username = "user" AndAlso password = "user123" Then
-            MessageBox.Show("User logged in successfully.", "Success")
-            Dim userform As New UserForm()
-            userform.Show()
+        ' Allow any username and password
+        If Not String.IsNullOrEmpty(username) And Not String.IsNullOrEmpty(password) Then
+            MessageBox.Show("Login Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' Navigate to admin form or dashboard
+            Dim userForm As New UserForm() ' Replace with your actual form name
+            userForm.Show()
             Me.Hide()
         Else
-            MessageBox.Show("Invalid credentials.", "Login Failed")
+            MessageBox.Show("Username or Password cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+    End Sub
+
+    Private Sub userLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Set the password textbox to mask characters
+        TxtPassword.PasswordChar = "*"c
     End Sub
 End Class
